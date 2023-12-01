@@ -93,6 +93,13 @@
         .listContent p {
             text-align: justify;
             color: #AAAAAA;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .listContent p.show{
+            opacity: 1;
+            transition: opacity 1s ease-in;
         }
 
         .imgBox {
@@ -171,11 +178,16 @@
                 if ($(this).find(".listContent").hasClass("contentAppear")) {
                     $(this).find(".listContent").removeClass("contentAppear");
                     $(this).find(".listContent").slideUp(900);
+                    $(".listContent p").removeClass("show");
                 } else {
                     $(".listContent").removeClass("contentAppear");
                     $(".listContent").slideUp();
                     $(this).find(".listContent").addClass("contentAppear");
                     $(this).find(".listContent").slideDown(800);
+                    setTimeout(() => {
+                        $(".listContent p").addClass("show");
+                    }, 500);
+                    
                 }
                 if (index == 0) {
                     $(".imgBox").css("background-image", 'url(' +
