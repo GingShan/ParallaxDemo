@@ -107,12 +107,12 @@
             background-color: #3c3c3c;
             border-radius: 15px;
             opacity: 0;
-            transition: all 1s ease-in-out;
+            transition: all .3s ease-out;
         }
 
         .imgBox.show {
             opacity: 1;
-            transition: all 1s ease-in-out;
+            transition: all .3s ease-out;
         }
     </style>
 </head>
@@ -204,7 +204,7 @@
             var container = $('#listArea');
             var object = $('#imgBox');
 
-            container.on('mouseover', function (event) {
+            container.on('mousemove', function (event) {
                 $(".imgBox").addClass("show");
                 var containerWidth = container.width();
                 var containerHeight = container.height();
@@ -214,8 +214,8 @@
                 // console.log(event.pageX,event.pageY)
 
                 // 计算物体内部坐标系的 x 和 y 轴位置
-                var objectX = mouseX - object.width() / 10;
-                var objectY = mouseY - object.height() / 10;
+                var objectX = mouseX - object.width() / 2;
+                var objectY = mouseY - object.height() / 2;
 
                 // 计算需要移动的距离，这里可以根据需要调整系数
                 var moveX = -1 * (objectX / containerWidth - 0.5) * 100;
