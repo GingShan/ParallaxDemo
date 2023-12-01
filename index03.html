@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
         * {
             padding: 0;
@@ -28,9 +32,16 @@
         p,
         span {
             margin: 0;
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
             color: #fff;
             letter-spacing: 1px;
+        }
+
+        sup.number {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            font-size: 0.95rem;
         }
 
         .listBlock {
@@ -48,10 +59,12 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            padding: 5% 0%;
         }
 
         .list {
             width: 100%;
+            border-bottom: 1px solid #636363;
         }
 
         .listTitle {
@@ -59,30 +72,33 @@
             text-align: left;
             cursor: pointer;
             padding: 1% 0%;
-            border-bottom: 1px solid #fff;
+            padding-bottom: 2%;
+            letter-spacing: 1px;
         }
 
         .listTitle::after {
             content: '⌵';
-            display: inline;
             margin-left: 1%;
+            font-size: 12px;
         }
 
         .listContent {
             display: none;
             width: 100%;
             padding: 3%;
+            transition: all .5s cubic-bezier(.47, .63, 1, 1);
+            padding-top: 10%;
         }
 
         .listContent p {
             text-align: justify;
+            color: #AAAAAA;
         }
 
         .imgBox {
-            display: none;
             position: absolute;
-            top: 0%;
-            right: 0%;
+            top: 15%;
+            right: 2%;
             width: 15vw;
             padding-top: 16vh;
             background-repeat: no-repeat;
@@ -90,7 +106,13 @@
             background-position: center;
             background-color: #3c3c3c;
             border-radius: 15px;
-            transition: all 0.5s ease-in-out;
+            opacity: 0;
+            transition: all 1s ease-in-out;
+        }
+
+        .imgBox.show {
+            opacity: 1;
+            transition: all 1s ease-in-out;
         }
     </style>
 </head>
@@ -100,53 +122,38 @@
         <div class="listArea" id="listArea">
             <div class="list">
                 <h1 class="listTitle">
-                    1.Lorem ipsum dolor sit amet.
+                    <sup class="number">01.</sup>&nbsp;All-About Meeting
                 </h1>
                 <div class="listContent">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum velit soluta, aperiam doloribus,
-                        iure cum recusandae aut dicta molestias similique quos adipisci voluptatibus facilis. Quae eaque
-                        iusto soluta, incidunt quas dolores consequatur voluptates, explicabo, veniam facere aliquid
-                        suscipit mollitia voluptatum quasi quo necessitatibus quia aperiam earum cum quod nesciunt?
-                        Commodi?</p>
+                    <p>targeted users, gift session design, gift types, areas to cover, payment mode, any other
+                        questions in your mind.</p>
                 </div>
             </div>
             <div class="list">
                 <h1 class="listTitle">
-                    2.Lorem ipsum dolor sit amet.
+                    <sup class="number">02.</sup>&nbsp;Build Management System
                 </h1>
                 <div class="listContent">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum velit soluta, aperiam doloribus,
-                        iure cum recusandae aut dicta molestias similique quos adipisci voluptatibus facilis. Quae eaque
-                        iusto soluta, incidunt quas dolores consequatur voluptates, explicabo, veniam facere aliquid
-                        suscipit mollitia voluptatum quasi quo necessitatibus quia aperiam earum cum quod nesciunt?
-                        Commodi?</p>
+                    <p>for your team to operate the gifting session upon your own business plan.</p>
                 </div>
             </div>
             <div class="list">
                 <h1 class="listTitle">
-                    3.Lorem ipsum dolor sit amet.
+                    <sup class="number">03.</sup>&nbsp;System Maintenance & Refine
                 </h1>
                 <div class="listContent">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum velit soluta, aperiam doloribus,
-                        iure cum recusandae aut dicta molestias similique quos adipisci voluptatibus facilis. Quae eaque
-                        iusto soluta, incidunt quas dolores consequatur voluptates, explicabo, veniam facere aliquid
-                        suscipit mollitia voluptatum quasi quo necessitatibus quia aperiam earum cum quod nesciunt?
-                        Commodi?</p>
+                    <p>to ensure stocks, order & delivery go smoothly.</p>
                 </div>
             </div>
             <div class="list">
                 <h1 class="listTitle">
-                    4.Lorem ipsum dolor sit amet.
+                    <sup class="number">04.</sup>&nbsp;Tutorial Lesson
                 </h1>
                 <div class="listContent">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum velit soluta, aperiam doloribus,
-                        iure cum recusandae aut dicta molestias similique quos adipisci voluptatibus facilis. Quae eaque
-                        iusto soluta, incidunt quas dolores consequatur voluptates, explicabo, veniam facere aliquid
-                        suscipit mollitia voluptatum quasi quo necessitatibus quia aperiam earum cum quod nesciunt?
-                        Commodi?</p>
+                    <p>quick lectures about system operation and future follow-ups.</p>
                 </div>
             </div>
-            <div class="imgBox" id="imgBox"></div>
+            <div class="imgBox" id="imgBox" style="background-image: url(./images/img/page03_item01.png);"></div>
         </div>
     </section>
 
@@ -156,53 +163,63 @@
     crossorigin='anonymous'></script>
 <script>
     $(function () {
-        let List = $(".list");
-        $(".listContent").slideUp();
+        let List = document.querySelectorAll(".list");
         let y = $('.listTitle').outerHeight();
-        // console.log(y)
         let Box = document.querySelector(".imgBox");
-        List.click(function () {
-            // $(".listContent").slideUp();
-            $(this).find('.listContent').slideToggle(800);
-            $(".imgBox").fadeIn(800);
-        })
-        let list = document.querySelectorAll(".list");
-        list.forEach(function (item, index) {
+        List.forEach(function (item, index) {
             item.addEventListener("click", function () {
-                let listY = index * y;
-                Box.style.top = (listY * 0.3) + '%';
+                if ($(this).find(".listContent").hasClass("contentAppear")) {
+                    $(this).find(".listContent").removeClass("contentAppear");
+                    $(this).find(".listContent").slideUp(900);
+                } else {
+                    $(".listContent").removeClass("contentAppear");
+                    $(".listContent").slideUp();
+                    $(this).find(".listContent").addClass("contentAppear");
+                    $(this).find(".listContent").slideDown(800);
+                }
                 if (index == 0) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item01.png' + ')');
+                    $(".imgBox").css("top", "17%");
                 }
                 if (index == 1) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item02.png' + ')');
+                    $(".imgBox").css("top", "22%");
                 }
                 if (index == 2) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item03.png' + ')');
+                    $(".imgBox").css("top", "31%");
                 }
                 if (index == 3) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item04.png' + ')');
+                    $(".imgBox").css("top", "42%");
                 }
             });
-        });
+        })
+
         $(document).ready(function () {
             var container = $('#listArea');
             var object = $('#imgBox');
 
             container.on('mouseover', function (event) {
+                $(".imgBox").addClass("show");
                 var containerWidth = container.width();
                 var containerHeight = container.height();
 
-                var mouseX = event.pageX - container.offset().left;
+                var mouseX = event.pageX - container.offset().left
                 var mouseY = event.pageY - container.offset().top;
+                // console.log(event.pageX,event.pageY)
+
+                // 计算物体内部坐标系的 x 和 y 轴位置
+                var objectX = mouseX - object.width() / 10;
+                var objectY = mouseY - object.height() / 10;
 
                 // 计算需要移动的距离，这里可以根据需要调整系数
-                var moveX = (mouseX / containerWidth - 0.5) * 100;
-                var moveY = (mouseY / containerHeight - 0.5) * 100;
+                var moveX = -1 * (objectX / containerWidth - 0.5) * 100;
+                var moveY = -1 * (objectY / containerHeight - 0.5) * 100;
 
                 // 使用 animate 方法实现视差滚动效果
                 object.css('transform', 'translate(' + moveX + 'px, ' + moveY + 'px)');
@@ -211,6 +228,7 @@
             container.on('mouseout', function () {
                 // 当鼠标移出容器时，重置位置
                 object.css('transform', 'translate(0, 0)');
+                $(".imgBox").removeClass("show");
             });
         });
     });
