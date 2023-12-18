@@ -38,10 +38,14 @@
             letter-spacing: 1px;
         }
 
+        h1 {
+            font-size: 42px;
+        }
+
         sup.number {
             font-family: 'Poppins', sans-serif;
             font-weight: 300;
-            font-size: 0.95rem;
+            font-size: 18px;
         }
 
         .listBlock {
@@ -54,7 +58,7 @@
 
         .listArea {
             display: flex;
-            width: 50%;
+            width: 66.62%;
             margin: 0 auto;
             justify-content: center;
             align-items: center;
@@ -64,50 +68,73 @@
 
         .list {
             width: 100%;
-            border-bottom: 1px solid #636363;
+            border-bottom: 2px solid #636363;
+            transition: all .7s ease-in-out;
+        }
+
+        .list.show {
+            padding-left: 2%;
+            transition: all .7s ease-in-out;
         }
 
         .listTitle {
+            display: flex;
             width: 100%;
             text-align: left;
             cursor: pointer;
-            padding: 1% 0%;
-            padding-bottom: 2%;
+            padding: 1.5% 0%;
             letter-spacing: 1px;
+            align-items: center;
         }
 
-        .listTitle::after {
+        .listTitle span {
+            font-size: 12px;
+            margin-left: 1%;
+            margin-top: 0.5%;
+        }
+
+        .listTitle .number {
+            transform: translateY(-60%);
+        }
+
+        /* .listTitle::after {
             content: '⌵';
             margin-left: 1%;
             font-size: 12px;
-        }
+        } */
 
         .listContent {
             display: none;
             width: 100%;
             padding: 3%;
-            transition: all .5s linear;
-            padding-top: 10%;
+            /* transition: all 1s ease-in-out; */
+            padding-top: 5%;
         }
 
         .listContent p {
+            font-size: 18px;
             text-align: justify;
             color: #AAAAAA;
             opacity: 0;
             transition: opacity 1s ease-in;
         }
 
-        .listContent p.show{
+        .listContent p span {
+            display: block;
+            color: #AAAAAA;
+        }
+
+        .listContent p.show {
             opacity: 1;
             transition: opacity 1s ease-in;
         }
 
         .imgBox {
             position: absolute;
-            top: 15%;
+            top: 12%;
             right: 2%;
-            width: 15vw;
-            padding-top: 16vh;
+            width: 15.84vw;
+            padding-top: 20.75vh;
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -121,6 +148,33 @@
             opacity: 1;
             transition: all .3s ease-out;
         }
+
+        @media screen and (max-width:1024px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            sup.number {
+                font-size: 16px;
+            }
+
+            .listContent p {
+                font-size: 16px;
+            }
+        }
+        @media screen and (max-width:768px){
+            h1 {
+                font-size: 24px;
+            }
+
+            sup.number {
+                font-size: 14px;
+            }
+
+            .listContent p {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -129,16 +183,17 @@
         <div class="listArea" id="listArea">
             <div class="list">
                 <h1 class="listTitle">
-                    <sup class="number">01.</sup>&nbsp;All-About Meeting
+                    <sup class="number">01.</sup>&nbsp;All-About Meeting<span>⌵</span>
                 </h1>
                 <div class="listContent">
-                    <p>targeted users, gift session design, gift types, areas to cover, payment mode, any other
-                        questions in your mind.</p>
+                    <p>targeted users, gift session design, gift types, areas to cover,
+                        <span> payment mode, any other questions in your mind.</span>
+                    </p>
                 </div>
             </div>
             <div class="list">
                 <h1 class="listTitle">
-                    <sup class="number">02.</sup>&nbsp;Build Management System
+                    <sup class="number">02.</sup>&nbsp;Build Management System<span>⌵</span>
                 </h1>
                 <div class="listContent">
                     <p>for your team to operate the gifting session upon your own business plan.</p>
@@ -146,7 +201,7 @@
             </div>
             <div class="list">
                 <h1 class="listTitle">
-                    <sup class="number">03.</sup>&nbsp;System Maintenance & Refine
+                    <sup class="number">03.</sup>&nbsp;System Maintenance & Refine<span>⌵</span>
                 </h1>
                 <div class="listContent">
                     <p>to ensure stocks, order & delivery go smoothly.</p>
@@ -154,7 +209,7 @@
             </div>
             <div class="list">
                 <h1 class="listTitle">
-                    <sup class="number">04.</sup>&nbsp;Tutorial Lesson
+                    <sup class="number">04.</sup>&nbsp;Tutorial Lesson<span>⌵</span>
                 </h1>
                 <div class="listContent">
                     <p>quick lectures about system operation and future follow-ups.</p>
@@ -177,39 +232,72 @@
             item.addEventListener("click", function () {
                 if ($(this).find(".listContent").hasClass("contentAppear")) {
                     $(this).find(".listContent").removeClass("contentAppear");
-                    $(this).find(".listContent").slideUp(900);
+                    $(this).find(".listContent").slideUp(1000, "swing");
                     $(".listContent p").removeClass("show");
+                    $(this).removeClass("show");
                 } else {
                     $(".listContent").removeClass("contentAppear");
-                    $(".listContent").slideUp();
+                    $(".listContent").slideUp(1000, "swing");
                     $(this).find(".listContent").addClass("contentAppear");
-                    $(this).find(".listContent").slideDown(800);
+                    $(this).find(".listContent").slideDown(1000, "swing");
+                    $(".list").removeClass("show");
+                    $(this).addClass("show");
                     setTimeout(() => {
                         $(".listContent p").addClass("show");
                     }, 500);
-                    
+
                 }
                 if (index == 0) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item01.png' + ')');
-                    $(".imgBox").css("top", "17%");
+                    setTimeout(() => {
+                        $(".imgBox").css("top", "6%");
+                    }, 500);
+
                 }
                 if (index == 1) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item02.png' + ')');
-                    $(".imgBox").css("top", "22%");
+                    setTimeout(() => {
+                        $(".imgBox").css("top", "20%");
+                    }, 500);
+
                 }
                 if (index == 2) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item03.png' + ')');
-                    $(".imgBox").css("top", "31%");
+                    setTimeout(() => {
+                        $(".imgBox").css("top", "33%");
+                    }, 500);
+
                 }
                 if (index == 3) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item04.png' + ')');
-                    $(".imgBox").css("top", "42%");
+                    setTimeout(() => {
+                        $(".imgBox").css("top", "45%");
+                    }, 500);
+
                 }
             });
+            item.addEventListener("mouseover", function () {
+                if (index == 0) {
+                    $(".imgBox").css("background-image", 'url(' +
+                        './images/img/page03_item01.png' + ')');
+                }
+                if (index == 1) {
+                    $(".imgBox").css("background-image", 'url(' +
+                        './images/img/page03_item02.png' + ')');
+                }
+                if (index == 2) {
+                    $(".imgBox").css("background-image", 'url(' +
+                        './images/img/page03_item03.png' + ')');
+                }
+                if (index == 3) {
+                    $(".imgBox").css("background-image", 'url(' +
+                        './images/img/page03_item04.png' + ')');
+                }
+            })
         })
 
         $(document).ready(function () {
