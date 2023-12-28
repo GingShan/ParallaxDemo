@@ -69,12 +69,12 @@
         .list {
             width: 100%;
             border-bottom: 2px solid #636363;
-            transition: all .7s ease-in-out;
+            transition: all .5s ease-in-out;
         }
 
-        .list.show {
+        .list:hover {
             padding-left: 2%;
-            transition: all .7s ease-in-out;
+            /* transition: all .7s ease-in-out; */
         }
 
         .listTitle {
@@ -132,7 +132,7 @@
         .imgBox {
             position: absolute;
             top: 12%;
-            right: 2%;
+            right: 4%;
             width: 15.84vw;
             padding-top: 20.75vh;
             background-repeat: no-repeat;
@@ -141,6 +141,7 @@
             background-color: #3c3c3c;
             border-radius: 15px;
             opacity: 0;
+            pointer-events: none;
             transition: all .3s ease-out;
         }
 
@@ -162,7 +163,8 @@
                 font-size: 16px;
             }
         }
-        @media screen and (max-width:768px){
+
+        @media screen and (max-width:768px) {
             h1 {
                 font-size: 24px;
             }
@@ -234,14 +236,11 @@
                     $(this).find(".listContent").removeClass("contentAppear");
                     $(this).find(".listContent").slideUp(1000, "swing");
                     $(".listContent p").removeClass("show");
-                    $(this).removeClass("show");
                 } else {
                     $(".listContent").removeClass("contentAppear");
                     $(".listContent").slideUp(1000, "swing");
                     $(this).find(".listContent").addClass("contentAppear");
                     $(this).find(".listContent").slideDown(1000, "swing");
-                    $(".list").removeClass("show");
-                    $(this).addClass("show");
                     setTimeout(() => {
                         $(".listContent p").addClass("show");
                     }, 500);
@@ -250,52 +249,77 @@
                 if (index == 0) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item01.png' + ')');
-                    setTimeout(() => {
                         $(".imgBox").css("top", "6%");
+                    setTimeout(() => {
+                        
                     }, 500);
 
                 }
                 if (index == 1) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item02.png' + ')');
-                    setTimeout(() => {
                         $(".imgBox").css("top", "20%");
+                    setTimeout(() => {
+                        
                     }, 500);
 
                 }
                 if (index == 2) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item03.png' + ')');
-                    setTimeout(() => {
                         $(".imgBox").css("top", "33%");
+                    setTimeout(() => {
+                        
                     }, 500);
 
                 }
                 if (index == 3) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item04.png' + ')');
-                    setTimeout(() => {
                         $(".imgBox").css("top", "45%");
+                    setTimeout(() => {
+                        
                     }, 500);
 
                 }
             });
             item.addEventListener("mouseover", function () {
+                $(".imgBox").addClass("show");
                 if (index == 0) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item01.png' + ')');
+                    $(".imgBox").css('transform', 'translate(0, 0)');
+                    $(".imgBox").css("top", "6%");
+                    setTimeout(() => {
+                        
+                    }, 500);
                 }
                 if (index == 1) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item02.png' + ')');
+                    $(".imgBox").css('transform', 'translate(0, 0)');
+                    $(".imgBox").css("top", "20%");
+                    setTimeout(() => {
+                        
+                    }, 500);
                 }
                 if (index == 2) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item03.png' + ')');
+                    $(".imgBox").css('transform', 'translate(0, 0)');
+                    $(".imgBox").css("top", "42%");
+                    setTimeout(() => {
+                        
+                    }, 500);
                 }
                 if (index == 3) {
                     $(".imgBox").css("background-image", 'url(' +
                         './images/img/page03_item04.png' + ')');
+                    $(".imgBox").css('transform', 'translate(0, 0)');
+                    $(".imgBox").css("top", "60%");
+                    setTimeout(() => {
+                        
+                    }, 500);
                 }
             })
         })
@@ -305,7 +329,7 @@
             var object = $('#imgBox');
 
             container.on('mousemove', function (event) {
-                $(".imgBox").addClass("show");
+                
                 var containerWidth = container.width();
                 var containerHeight = container.height();
 
@@ -318,8 +342,8 @@
                 var objectY = mouseY - object.height() / 2;
 
                 // 计算需要移动的距离，这里可以根据需要调整系数
-                var moveX = -1 * (objectX / containerWidth - 0.5) * 100;
-                var moveY = -1 * (objectY / containerHeight - 0.5) * 100;
+                var moveX = -1 * (objectX / containerWidth - 1) * 100;
+                var moveY = -1 * (objectY / containerHeight - 1) * 100;
 
                 // 使用 animate 方法实现视差滚动效果
                 object.css('transform', 'translate(' + moveX + 'px, ' + moveY + 'px)');
